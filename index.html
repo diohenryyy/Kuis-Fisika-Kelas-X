@@ -1,0 +1,1103 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <meta name="theme-color" content="#0f172a" />
+  <title>Latihan Fisika Kelas X</title>
+  <style>
+    :root{
+      --bg1:#06131f;
+      --bg2:#0f172a;
+      --bg3:#111827;
+      --panel:rgba(15,23,42,0.78);
+      --panel2:rgba(17,24,39,0.85);
+      --card:rgba(15,23,42,0.82);
+      --primary:#38bdf8;
+      --primary2:#7dd3fc;
+      --accent:#f59e0b;
+      --success:#34d399;
+      --danger:#f87171;
+      --warning:#fbbf24;
+      --text:#e2e8f0;
+      --muted:#94a3b8;
+      --border:rgba(148,163,184,0.28);
+      --shadow:0 20px 45px rgba(2,6,23,0.5);
+    }
+
+    *{box-sizing:border-box;}
+    html,body{
+      margin:0;
+      width:100%;
+      height:100%;
+      font-family:Inter,"Segoe UI",Arial,sans-serif;
+      background:
+        radial-gradient(circle at top left, rgba(56,189,248,0.18), transparent 22%),
+        radial-gradient(circle at bottom right, rgba(245,158,11,0.10), transparent 20%),
+        linear-gradient(140deg, var(--bg1), var(--bg2));
+      color:var(--text);
+      overscroll-behavior:none;
+      user-select:none;
+      -webkit-user-select:none;
+      touch-action:manipulation;
+    }
+
+    body{
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      overflow:hidden;
+      padding:12px;
+    }
+
+    .app{
+      width:min(980px,100%);
+      height:min(96vh, 950px);
+      background:rgba(15,23,42,0.8);
+      border:1px solid var(--border);
+      border-radius:24px;
+      box-shadow:var(--shadow);
+      position:relative;
+      overflow:hidden;
+      backdrop-filter:blur(14px);
+    }
+
+    .topbar{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:14px;
+      background:rgba(15,23,42,0.58);
+      border-bottom:1px solid var(--border);
+      padding:16px 18px 12px;
+    }
+
+    .brand{
+      display:flex;
+      align-items:center;
+      gap:12px;
+      min-width:0;
+    }
+
+    .brand-badge{
+      width:42px;
+      height:42px;
+      display:grid;
+      place-items:center;
+      border-radius:14px;
+      background:linear-gradient(135deg, var(--primary), var(--accent));
+      color:#02131e;
+      font-weight:900;
+      font-size:22px;
+      box-shadow:0 10px 25px rgba(56,189,248,0.3);
+    }
+
+    .brand-text{
+      min-width:0;
+    }
+
+    .brand-text h1{
+      margin:0;
+      font-size:clamp(1.05rem, 2vw, 1.55rem);
+      line-height:1.15;
+      white-space:nowrap;
+      overflow:hidden;
+      text-overflow:ellipsis;
+    }
+
+    .brand-text small{
+      display:block;
+      margin-top:4px;
+      color:var(--muted);
+      letter-spacing:0.04em;
+    }
+
+    .timer{
+      min-width:120px;
+      text-align:center;
+      padding:10px 14px;
+      border-radius:14px;
+      font-weight:800;
+      letter-spacing:0.06em;
+      background:rgba(15,118,110,0.18);
+      border:1px solid rgba(52,211,153,0.35);
+      color:#d1fae5;
+      box-shadow:inset 0 0 0 1px rgba(255,255,255,0.02);
+    }
+
+    .timer.warning{
+      background:rgba(146,64,14,0.18);
+      border-color:rgba(251,191,36,0.45);
+      color:#fef3c7;
+    }
+
+    .timer.danger{
+      background:rgba(127,29,29,0.22);
+      border-color:rgba(248,113,113,0.5);
+      color:#fee2e2;
+    }
+
+    .screen{
+      position:relative;
+      z-index:1;
+      height:calc(100% - 72px);
+      padding:16px 18px 18px;
+      overflow:auto;
+    }
+
+    .hidden{display:none !important;}
+
+    .welcome{
+      height:100%;
+      display:grid;
+      place-items:center;
+    }
+
+    .welcome-card{
+      width:min(560px,100%);
+      background:linear-gradient(145deg, rgba(15,23,42,0.92), rgba(17,24,39,0.84));
+      border:1px solid var(--border);
+      border-radius:28px;
+      box-shadow:var(--shadow);
+      padding:24px 20px 18px;
+    }
+
+    .welcome-card h2{
+      margin:0 0 12px;
+      font-size:clamp(1.4rem, 4vw, 2.2rem);
+      line-height:1.2;
+    }
+
+    .welcome-card p{
+      margin:0 0 18px;
+      color:var(--muted);
+      line-height:1.7;
+    }
+
+    .field{
+      margin-bottom:16px;
+    }
+
+    .field label{
+      display:block;
+      margin-bottom:8px;
+      color:#dfeaf8;
+      font-weight:700;
+    }
+
+    .field input{
+      width:100%;
+      border:1px solid rgba(148,163,184,0.25);
+      background:rgba(15,23,42,0.82);
+      color:var(--text);
+      border-radius:14px;
+      padding:14px 14px;
+      font-size:1rem;
+      outline:none;
+      transition:0.2s ease;
+    }
+
+    .field input:focus{
+      border-color:rgba(56,189,248,0.85);
+      box-shadow:0 0 0 3px rgba(56,189,248,0.12);
+    }
+
+    .btn{
+      width:100%;
+      border:none;
+      border-radius:14px;
+      padding:15px 16px;
+      background:linear-gradient(135deg, var(--primary2), var(--primary));
+      color:#03161e;
+      font-weight:800;
+      font-size:1rem;
+      box-shadow:0 16px 30px rgba(56,189,248,0.22);
+      cursor:pointer;
+      transition:transform 0.12s ease, opacity 0.15s ease, box-shadow 0.2s ease;
+    }
+
+    .btn:active{transform:translateY(1px) scale(0.995);}
+    .btn.secondary{
+      background:linear-gradient(135deg, #cbd5e1, #e2e8f0);
+      color:#0f172a;
+      box-shadow:none;
+    }
+    .btn.danger{
+      background:linear-gradient(135deg, #fda4af, #fb7185);
+      color:#fff;
+      box-shadow:0 16px 30px rgba(244,63,94,0.18);
+    }
+
+    .mini-note{
+      margin-top:14px;
+      font-size:0.82rem;
+      line-height:1.5;
+      color:var(--muted);
+      text-align:center;
+    }
+
+    .exam{
+      display:flex;
+      flex-direction:column;
+      height:100%;
+      gap:14px;
+    }
+
+    .progress-wrap{
+      display:flex;
+      align-items:center;
+      gap:12px;
+      background:rgba(15,23,42,0.45);
+      border:1px solid var(--border);
+      border-radius:16px;
+      padding:10px 12px;
+    }
+
+    .progress{
+      position:relative;
+      flex:1;
+      height:12px;
+      background:rgba(148,163,184,0.18);
+      border-radius:999px;
+      overflow:hidden;
+    }
+
+    .progress-bar{
+      width:0%;
+      height:100%;
+      border-radius:inherit;
+      background:linear-gradient(90deg, var(--primary), var(--success));
+      transition:width 0.25s ease;
+    }
+
+    .question-count{
+      min-width:83px;
+      text-align:right;
+      font-weight:800;
+      color:var(--muted);
+    }
+
+    .question-card{
+      flex:1;
+      background:rgba(15,23,42,0.72);
+      border:1px solid var(--border);
+      border-radius:22px;
+      padding:18px 18px 14px;
+      display:flex;
+      flex-direction:column;
+      justify-content:space-between;
+      gap:14px;
+      box-shadow:inset 0 1px 0 rgba(255,255,255,0.02);
+    }
+
+    .question-head{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:10px;
+      margin-bottom:6px;
+    }
+
+    .pill{
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      border-radius:999px;
+      padding:7px 10px;
+      background:rgba(56,189,248,0.12);
+      border:1px solid rgba(56,189,248,0.2);
+      color:var(--primary2);
+      font-size:0.72rem;
+      font-weight:800;
+      letter-spacing:0.05em;
+      text-transform:uppercase;
+    }
+
+    .question-text{
+      margin:0;
+      font-size:clamp(1.05rem, 2.5vw, 1.42rem);
+      line-height:1.6;
+      font-weight:800;
+    }
+
+    .options{
+      display:grid;
+      gap:12px;
+      margin-top:10px;
+    }
+
+    .option{
+      width:100%;
+      border:1px solid rgba(148,163,184,0.22);
+      background:rgba(15,23,42,0.8);
+      color:var(--text);
+      border-radius:16px;
+      padding:14px 16px;
+      text-align:left;
+      font-size:1rem;
+      line-height:1.45;
+      cursor:pointer;
+      transition:0.18s ease;
+    }
+
+    .option:hover{
+      border-color:rgba(56,189,248,0.5);
+      background:rgba(15,118,110,0.08);
+    }
+
+    .option.selected{
+      border-color:rgba(56,189,248,0.9);
+      background:rgba(56,189,248,0.12);
+      box-shadow:0 0 0 2px rgba(56,189,248,0.18);
+    }
+
+    .nav{
+      display:grid;
+      grid-template-columns:1fr 1fr 1fr;
+      gap:10px;
+    }
+
+    .result{
+      display:grid;
+      place-items:center;
+      height:100%;
+    }
+
+    .result-card{
+      width:min(620px,100%);
+      background:linear-gradient(145deg, rgba(15,23,42,0.92), rgba(17,24,39,0.8));
+      border:1px solid var(--border);
+      border-radius:28px;
+      box-shadow:var(--shadow);
+      padding:22px 18px 18px;
+    }
+
+    .result-card h3{
+      margin:0 0 14px;
+      text-align:center;
+      font-size:clamp(1.3rem, 4vw, 2rem);
+    }
+
+    .score-ring{
+      width:150px;
+      height:150px;
+      margin:0 auto 18px;
+      border-radius:50%;
+      display:grid;
+      place-items:center;
+      background:
+        radial-gradient(circle at center, rgba(15,23,42,1) 0 60%, transparent 61%),
+        conic-gradient(var(--success) 0deg, var(--success) 200deg, rgba(148,163,184,0.18) 200deg 360deg);
+      position:relative;
+    }
+
+    .score-ring::before{
+      content:"";
+      position:absolute;
+      inset:15px;
+      border-radius:50%;
+      background:rgba(15,23,42,0.95);
+    }
+
+    .score-value{
+      position:relative;
+      z-index:1;
+      font-size:2rem;
+      font-weight:900;
+      color:#ecfeff;
+    }
+
+    .result-grid{
+      display:grid;
+      grid-template-columns:repeat(3, minmax(0,1fr));
+      gap:10px;
+      margin:18px 0;
+    }
+
+    .stat{
+      background:rgba(15,23,42,0.72);
+      border:1px solid var(--border);
+      border-radius:16px;
+      padding:12px 10px;
+      text-align:center;
+    }
+
+    .stat small{
+      display:block;
+      color:var(--muted);
+      font-weight:700;
+      letter-spacing:0.04em;
+      text-transform:uppercase;
+    }
+
+    .stat strong{
+      display:block;
+      margin-top:6px;
+      font-size:1.18rem;
+      color:#fff;
+    }
+
+    .message{
+      text-align:center;
+      color:var(--muted);
+      line-height:1.6;
+      margin-bottom:18px;
+    }
+
+    .result-actions{
+      display:grid;
+      gap:10px;
+    }
+
+    .focus-lock{
+      position:fixed;
+      inset:0;
+      display:none;
+      align-items:center;
+      justify-content:center;
+      background:rgba(2,6,23,0.86);
+      z-index:50;
+      text-align:center;
+      padding:20px;
+    }
+
+    .focus-lock.show{display:flex;}
+
+    .focus-lock-box{
+      background:rgba(15,23,42,0.92);
+      border:1px solid var(--border);
+      border-radius:22px;
+      padding:22px 18px;
+      max-width:420px;
+      box-shadow:var(--shadow);
+    }
+
+    .focus-lock-box h4{
+      margin:0 0 10px;
+      font-size:1.35rem;
+    }
+
+    .focus-lock-box p{
+      margin:0;
+      color:var(--muted);
+      line-height:1.6;
+    }
+
+    @media (max-width:640px){
+      body{padding:10px;}
+      .app{
+        width:100%;
+        height:100vh;
+        border-radius:18px;
+      }
+      .topbar{
+        padding:14px 12px 10px;
+      }
+      .brand-badge{
+        width:38px;
+        height:38px;
+      }
+      .timer{
+        min-width:100px;
+        padding:8px 10px;
+        font-size:0.8rem;
+      }
+      .screen{
+        padding:12px;
+      }
+      .nav{
+        grid-template-columns:1fr;
+      }
+      .result-grid{
+        grid-template-columns:1fr;
+      }
+      .question-card{
+        padding:14px 14px 12px;
+      }
+      .question-text{
+        font-size:1.05rem;
+      }
+      .option{
+        padding:12px 13px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="app">
+    <header class="topbar">
+      <div class="brand">
+        <div class="brand-badge">⚛</div>
+        <div class="brand-text">
+          <h1>Latihan Fisika Kelas X</h1>
+          <small>50 soal acak • Ujian Mandiri</small>
+        </div>
+      </div>
+      <div id="timer" class="timer">45:00</div>
+    </header>
+
+    <main class="screen">
+      <section id="welcomeScreen" class="welcome">
+        <div class="welcome-card">
+          <h2>Persiapan Ujian</h2>
+          <p>
+            Soal akan diacak setiap kali ujian dimulai. Kamu akan diberi waktu <strong>45 menit</strong>.
+            Pastikan layar tetap terbuka dan fokus pada halaman ini.
+          </p>
+
+          <div class="field">
+            <label for="studentName">Nama Siswa</label>
+            <input id="studentName" type="text" placeholder="Contoh: Budi Santoso" />
+          </div>
+
+          <div class="field">
+            <label for="className">Kelas</label>
+            <input id="className" type="text" placeholder="Contoh: X-A" />
+          </div>
+
+          <button id="startBtn" class="btn" type="button">Mulai Ujian</button>
+
+          <div class="mini-note">
+            Fitur ini dibuat sebaik mungkin untuk meminimalkan keluar dari tampilan saat ujian berlangsung.
+          </div>
+        </div>
+      </section>
+
+      <section id="examScreen" class="exam hidden">
+        <div class="progress-wrap">
+          <div class="progress">
+            <div id="progressBar" class="progress-bar"></div>
+          </div>
+          <div id="questionIndex" class="question-count">1/50</div>
+        </div>
+
+        <div id="questionCard" class="question-card"></div>
+
+        <div class="nav">
+          <button id="prevBtn" class="btn secondary" type="button">Sebelumnya</button>
+          <button id="nextBtn" class="btn secondary" type="button">Berikutnya</button>
+          <button id="submitBtn" class="btn danger" type="button">Selesai</button>
+        </div>
+      </section>
+
+      <section id="resultScreen" class="result hidden">
+        <div class="result-card">
+          <h3>Hasil Ujian</h3>
+
+          <div class="score-ring">
+            <div class="score-value" id="scorePercent">0%</div>
+          </div>
+
+          <div class="result-grid">
+            <div class="stat">
+              <small>Benar</small>
+              <strong id="correctCount">0</strong>
+            </div>
+            <div class="stat">
+              <small>Salah</small>
+              <strong id="wrongCount">0</strong>
+            </div>
+            <div class="stat">
+              <small>Nilai</small>
+              <strong id="finalScore">0</strong>
+            </div>
+          </div>
+
+          <div id="resultText" class="message">Kamu sudah selesai mengerjakan soal.</div>
+
+          <div class="result-actions">
+            <button id="sendWaBtn" class="btn" type="button">Kirim Hasil ke WhatsApp Guru</button>
+            <button id="restartBtn" class="btn secondary" type="button">Ulangi</button>
+          </div>
+
+          <div class="mini-note">
+            Hasil ujian tersimpan di perangkat dan dikirim otomatis ke WhatsApp guru saat selesai.
+          </div>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <div id="focusLock" class="focus-lock">
+    <div class="focus-lock-box">
+      <h4>Jangan Keluar dari Tampilan</h4>
+      <p>Ujian sedang berjalan. Mohon tetap fokus pada halaman ini sampai semua soal selesai.</p>
+    </div>
+  </div>
+
+  <script>
+    const TOTAL_QUESTIONS = 50;
+    const DURATION_SECONDS = 45 * 60;
+
+    const questionBank = [
+      // Manajemen Laboratorium
+      { q: "Peralatan yang wajib dipakai untuk melindungi mata saat bekerja di laboratorium adalah...", options: ["Masker", "Kacamata pelindung", "Sarung tangan", "Sepatu boot"], answer: "Kacamata pelindung", topic: "Manajemen Lab" },
+      { q: "Alat yang digunakan untuk menyimpan bahan kimia berbahaya dan beracun adalah...", options: ["Lemari es", "Lemari asam", "Rak buku", "Kulkas"], answer: "Lemari asam", topic: "Manajemen Lab" },
+      { q: "Jika terjadi tumpahan bahan kimia di meja kerja, tindakan pertama yang paling tepat adalah...", options: ["Menyapu cepat tanpa izin", "Memberi tahu guru dan membersihkan dengan cara aman", "Membuang ke saluran air", "Membiarkan sampai kering"], answer: "Memberi tahu guru dan membersihkan dengan cara aman", topic: "Manajemen Lab" },
+      { q: "Alat yang tepat untuk mengukur volume cairan dalam jumlah tertentu adalah...", options: ["Termometer", "Gelas ukur", "Mistar", "Neraca"], answer: "Gelas ukur", topic: "Manajemen Lab" },
+      { q: "Tujuan utama mencatat hasil percobaan di buku kerja laboratorium adalah...", options: ["Menambah pekerjaan", "Dokumentasi dan validasi data", "Menghindari membaca teori", "Membuat alat baru"], answer: "Dokumentasi dan validasi data", topic: "Manajemen Lab" },
+      { q: "Simbol yang menunjukkan bahan mudah terbakar biasanya berbentuk...", options: ["Lingkaran biru", "Segitiga kuning", "Tenda segitiga", "Bentuk api merah"], answer: "Bentuk api merah", topic: "Manajemen Lab" },
+      { q: "Perilaku aman di laboratorium yang paling tepat adalah...", options: ["Memakai APD sesuai kebutuhan", "Makan sambil praktikum", "Mengabaikan label bahan", "Berbicara keras di meja kerja"], answer: "Memakai APD sesuai kebutuhan", topic: "Manajemen Lab" },
+      { q: "Alat yang digunakan untuk memanaskan zat cair dalam jumlah kecil adalah...", options: ["Spiritus / pembakar", "Mistar", "Kacamata", "Neraca"], answer: "Spiritus / pembakar", topic: "Manajemen Lab" },
+      { q: "Benda tajam bekas praktikum sebaiknya dibuang di...", options: ["Tong sampah biasa", "Tempat sampah plastik", "Wadah benda tajam", "Lantai laboratorium"], answer: "Wadah benda tajam", topic: "Manajemen Lab" },
+      { q: "Alasan meja kerja harus selalu bersih dan rapi saat praktikum adalah...", options: ["Agar tampak bagus", "Menghindari kontaminasi dan kecelakaan", "Supaya cepat selesai", "Agar bahan tidak habis"], answer: "Menghindari kontaminasi dan kecelakaan", topic: "Manajemen Lab" },
+
+      // Besaran & Satuan
+      { q: "Satuan SI untuk panjang adalah...", options: ["Kilogram", "Sekon", "Meter", "Kelvin"], answer: "Meter", topic: "Besaran & Satuan" },
+      { q: "Besaran pokok yang satuannya kilogram adalah...", options: ["Panjang", "Waktu", "Massa", "Suhu"], answer: "Massa", topic: "Besaran & Satuan" },
+      { q: "Contoh besaran turunan adalah...", options: ["Panjang", "Massa", "Luas", "Waktu"], answer: "Luas", topic: "Besaran & Satuan" },
+      { q: "Satuan kecepatan dalam SI adalah...", options: ["m/s", "kg/m^3", "N", "J"], answer: "m/s", topic: "Besaran & Satuan" },
+      { q: "Besaran yang tidak memiliki arah dan hanya memiliki nilai adalah...", options: ["Vektor", "Skalar", "Besaran pokok", "Besaran turunan"], answer: "Skalar", topic: "Besaran & Satuan" },
+      { q: "Besaran yang diturunkan dari panjang dibagi waktu adalah...", options: ["Kecepatan", "Energi", "Massa jenis", "Gaya"], answer: "Kecepatan", topic: "Besaran & Satuan" },
+      { q: "Alat yang digunakan untuk mengukur suhu adalah...", options: ["Neraca", "Mistar", "Termometer", "Jangka sorong"], answer: "Termometer", topic: "Besaran & Satuan" },
+      { q: "Satuan SI untuk arus listrik adalah...", options: ["Ampere", "Kelvin", "Mol", "Candela"], answer: "Ampere", topic: "Besaran & Satuan" },
+      { q: "Satuan SI untuk waktu adalah...", options: ["Meter", "Kilogram", "Sekon", "Ampere"], answer: "Sekon", topic: "Besaran & Satuan" },
+      { q: "Besaran yang besarnya bergantung pada panjang, massa, dan waktu adalah...", options: ["Gaya", "Energi", "Kecepatan", "Volume"], answer: "Gaya", topic: "Besaran & Satuan" },
+
+      // Angka Penting
+      { q: "Banyaknya angka penting pada 12,50 adalah...", options: ["2", "3", "4", "5"], answer: "4", topic: "Angka Penting" },
+      { q: "Banyaknya angka penting pada 0,00420 adalah...", options: ["2", "3", "4", "5"], answer: "3", topic: "Angka Penting" },
+      { q: "Hasil dari 45,0 + 2,25 adalah...", options: ["47,3", "47,25", "47,2", "47"], answer: "47,3", topic: "Angka Penting" },
+      { q: "Hasil dari 0,0250 × 4,0 adalah...", options: ["0,1", "0,10", "0,100", "0,010"], answer: "0,10", topic: "Angka Penting" },
+      { q: "Hasil dari 100,5 ÷ 5 adalah...", options: ["20,1", "20", "20,10", "20,0"], answer: "20,1", topic: "Angka Penting" },
+      { q: "Banyaknya angka penting pada 1200,0 adalah...", options: ["2", "3", "4", "5"], answer: "5", topic: "Angka Penting" },
+      { q: "Banyaknya angka penting pada 0,00090 adalah...", options: ["1", "2", "3", "4"], answer: "2", topic: "Angka Penting" },
+      { q: "Hasil penjumlahan 8,750 + 0,25 dengan aturan angka penting adalah...", options: ["9,00", "9,0", "9", "9,000"], answer: "9,00", topic: "Angka Penting" },
+      { q: "Hasil perkalian 2,34 × 1,2 dengan aturan angka penting adalah...", options: ["2,8", "2,808", "2,80", "3"], answer: "2,8", topic: "Angka Penting" },
+      { q: "Hasil pengurangan 25,60 - 0,2 dengan aturan angka penting adalah...", options: ["25,6", "25,4", "25,40", "25"], answer: "25,4", topic: "Angka Penting" },
+
+      // Notasi Ilmiah
+      { q: "Bentuk notasi ilmiah dari 0,00045 adalah...", options: ["4,5 × 10^-3", "4,5 × 10^-4", "45 × 10^-5", "0,45 × 10^-3"], answer: "4,5 × 10^-4", topic: "Notasi Ilmiah" },
+      { q: "Bentuk biasa dari 3,5 × 10^5 adalah...", options: ["3500", "35000", "350000", "3500000"], answer: "350000", topic: "Notasi Ilmiah" },
+      { q: "Bentuk notasi ilmiah dari 0,00000625 adalah...", options: ["6,25 × 10^-6", "6,25 × 10^-5", "62,5 × 10^-7", "0,625 × 10^-5"], answer: "6,25 × 10^-6", topic: "Notasi Ilmiah" },
+      { q: "Bentuk biasa dari 2,3 × 10^4 adalah...", options: ["2300", "23000", "230000", "230"], answer: "23000", topic: "Notasi Ilmiah" },
+      { q: "Bentuk biasa dari 7,8 × 10^-3 adalah...", options: ["0,078", "0,0078", "7800", "78"], answer: "0,0078", topic: "Notasi Ilmiah" },
+      { q: "Hasil dari (3 × 10^2) × (2 × 10^3) adalah...", options: ["6 × 10^5", "6 × 10^6", "5 × 10^5", "3 × 10^5"], answer: "6 × 10^5", topic: "Notasi Ilmiah" },
+      { q: "Hasil dari 8,4 × 10^5 ÷ 2 × 10^2 adalah...", options: ["4,2 × 10^3", "4,2 × 10^2", "8,4 × 10^3", "2,1 × 10^3"], answer: "4,2 × 10^3", topic: "Notasi Ilmiah" },
+      { q: "Hasil dari 1,5 × 10^-2 + 2,0 × 10^-3 adalah...", options: ["1,7 × 10^-2", "1,5 × 10^-2", "1,7 × 10^-3", "1,5 × 10^-3"], answer: "1,7 × 10^-2", topic: "Notasi Ilmiah" },
+      { q: "Bentuk biasa dari 5,00 × 10^6 adalah...", options: ["500000", "5000000", "50000", "50000000"], answer: "5000000", topic: "Notasi Ilmiah" },
+      { q: "Hasil dari 9,0 × 10^4 + 1,0 × 10^3 adalah...", options: ["9,0 × 10^4", "9,1 × 10^4", "1,0 × 10^5", "9,9 × 10^4"], answer: "9,1 × 10^4", topic: "Notasi Ilmiah" },
+
+      // Pengukuran
+      { q: "Alat yang paling tepat untuk mengukur diameter kawat kecil adalah...", options: ["Mistar", "Jangka sorong", "Mikrometer sekrup", "Rol meter"], answer: "Mikrometer sekrup", topic: "Pengukuran" },
+      { q: "Ketelitian jangka sorong biasanya adalah...", options: ["0,1 cm", "0,01 cm", "1 cm", "0,001 cm"], answer: "0,01 cm", topic: "Pengukuran" },
+      { q: "Pada pengukuran panjang, angka 12,4 cm memiliki ketelitian sampai...", options: ["1 cm", "0,1 cm", "0,01 cm", "0,001 cm"], answer: "0,1 cm", topic: "Pengukuran" },
+      { q: "Satuan SI suhu yang paling umum digunakan dalam fisika adalah...", options: ["Celcius", "Fahrenheit", "Kelvin", "Reamur"], answer: "Kelvin", topic: "Pengukuran" },
+      { q: "Kesalahan sistematis pada pengukuran biasanya disebabkan oleh...", options: ["Pembacaan acak", "Alat ukur yang rusak atau tidak kalibrasi", "Kehadiran orang yang tidak tahu", "Kesalahan saat menulis"], answer: "Alat ukur yang rusak atau tidak kalibrasi", topic: "Pengukuran" },
+      { q: "Pengukuran berulang dilakukan untuk...", options: ["Membuat data lebih banyak", "Mengurangi kesalahan acak", "Menaikkan nilai", "Menyembunyikan hasil"], answer: "Mengurangi kesalahan acak", topic: "Pengukuran" },
+      { q: "Jika panjang benda diukur 15,6 cm dan lebar 3,2 cm, luas benda dengan aturan angka penting adalah...", options: ["50 cm²", "49,9 cm²", "49 cm²", "50,0 cm²"], answer: "50 cm²", topic: "Pengukuran" },
+      { q: "Satuan SI untuk volume adalah...", options: ["cm³", "L", "m³", "kg"], answer: "m³", topic: "Pengukuran" },
+      { q: "Jika panjang suatu persegi panjang 1,25 m dan lebarnya 0,40 m, luasnya adalah...", options: ["0,50 m²", "0,500 m²", "0,5 m²", "0,05 m²"], answer: "0,50 m²", topic: "Pengukuran" },
+      { q: "Tujuan pengukuran dalam fisika adalah untuk menentukan...", options: ["Nilai atau besaran suatu benda", "Jumlah soal", "Tanggal ujian", "Nama alat"], answer: "Nilai atau besaran suatu benda", topic: "Pengukuran" }
+    ];
+
+    const dbName = "fisikaQuizDB";
+    const dbVersion = 1;
+    let db = null;
+
+    const studentNameInput = document.getElementById("studentName");
+    const classNameInput = document.getElementById("className");
+    const timerEl = document.getElementById("timer");
+    const welcomeScreen = document.getElementById("welcomeScreen");
+    const examScreen = document.getElementById("examScreen");
+    const resultScreen = document.getElementById("resultScreen");
+    const questionCard = document.getElementById("questionCard");
+    const progressBar = document.getElementById("progressBar");
+    const questionIndex = document.getElementById("questionIndex");
+    const prevBtn = document.getElementById("prevBtn");
+    const nextBtn = document.getElementById("nextBtn");
+    const submitBtn = document.getElementById("submitBtn");
+    const startBtn = document.getElementById("startBtn");
+    const restartBtn = document.getElementById("restartBtn");
+    const sendWaBtn = document.getElementById("sendWaBtn");
+    const scorePercent = document.getElementById("scorePercent");
+    const correctCount = document.getElementById("correctCount");
+    const wrongCount = document.getElementById("wrongCount");
+    const finalScore = document.getElementById("finalScore");
+    const resultText = document.getElementById("resultText");
+    const focusLock = document.getElementById("focusLock");
+
+    const state = {
+      started: false,
+      currentIndex: 0,
+      timer: DURATION_SECONDS,
+      timerId: null,
+      questions: [],
+      answers: [],
+      resultSent: false
+    };
+
+    function shuffleArray(arr){
+      const copy = [...arr];
+      for(let i = copy.length - 1; i > 0; i--){
+        const j = Math.floor(Math.random() * (i + 1));
+        [copy[i], copy[j]] = [copy[j], copy[i]];
+      }
+      return copy;
+    }
+
+    function getRandomQuestions(count = TOTAL_QUESTIONS){
+      const selected = shuffleArray(questionBank).slice(0, count);
+      return selected.map((item) => {
+        const options = shuffleArray(item.options);
+        return {
+          ...item,
+          options,
+          correctAnswer: item.answer
+        };
+      });
+    }
+
+    function formatTime(totalSeconds){
+      const m = String(Math.floor(totalSeconds / 60)).padStart(2, "0");
+      const s = String(totalSeconds % 60).padStart(2, "0");
+      return `${m}:${s}`;
+    }
+
+    function updateTimerDisplay(){
+      timerEl.textContent = formatTime(state.timer);
+      timerEl.classList.remove("warning", "danger");
+      if (state.timer <= 60) {
+        timerEl.classList.add("danger");
+      } else if (state.timer <= 180) {
+        timerEl.classList.add("warning");
+      }
+    }
+
+    function renderQuestion(){
+      const current = state.questions[state.currentIndex];
+      const selectedIndex = state.answers[state.currentIndex];
+
+      questionCard.innerHTML = `
+        <div class="question-head">
+          <div class="pill">Soal ${state.currentIndex + 1}</div>
+          <div class="pill">${current.topic}</div>
+        </div>
+
+        <p class="question-text">${current.q}</p>
+
+        <div class="options">
+          ${current.options.map((option, index) => `
+            <button
+              type="button"
+              class="option ${selectedIndex === index ? "selected" : ""}"
+              data-index="${index}"
+            >
+              ${String.fromCharCode(65 + index)}. ${option}
+            </button>
+          `).join("")}
+        </div>
+      `;
+
+      document.querySelectorAll(".option").forEach((btn) => {
+        btn.addEventListener("click", () => {
+          const idx = Number(btn.dataset.index);
+          state.answers[state.currentIndex] = idx;
+          renderQuestion();
+        });
+      });
+
+      const progressPercent = ((state.currentIndex + 1) / state.questions.length) * 100;
+      progressBar.style.width = `${progressPercent}%`;
+      questionIndex.textContent = `${state.currentIndex + 1}/${state.questions.length}`;
+
+      prevBtn.disabled = state.currentIndex === 0;
+      prevBtn.style.opacity = state.currentIndex === 0 ? "0.45" : "1";
+      nextBtn.textContent = state.currentIndex === state.questions.length - 1 ? "Terakhir" : "Berikutnya";
+    }
+
+    function validateBeforeStart(){
+      const name = studentNameInput.value.trim();
+      const klass = classNameInput.value.trim();
+      if (!name || !klass) {
+        alert("Isi Nama Siswa dan Kelas terlebih dahulu.");
+        return false;
+      }
+      return true;
+    }
+
+    async function enterFullscreen(){
+      try {
+        if (document.documentElement.requestFullscreen) {
+          await document.documentElement.requestFullscreen();
+        }
+      } catch (e) {
+        console.log("Fullscreen tidak didukung atau diblokir:", e);
+      }
+
+      if (screen.orientation && screen.orientation.lock) {
+        try { screen.orientation.lock("portrait"); } catch (e) {}
+      }
+    }
+
+    function startTimer(){
+      clearInterval(state.timerId);
+      state.timerId = setInterval(() => {
+        if (!state.started) return;
+        state.timer -= 1;
+        updateTimerDisplay();
+
+        if (state.timer <= 0) {
+          submitExam(true);
+        }
+      }, 1000);
+    }
+
+    function generateExam(){
+      state.questions = getRandomQuestions(TOTAL_QUESTIONS);
+      state.answers = Array(state.questions.length).fill(null);
+      state.currentIndex = 0;
+      state.timer = DURATION_SECONDS;
+      updateTimerDisplay();
+      renderQuestion();
+    }
+
+    function startQuiz(){
+      if (!validateBeforeStart()) return;
+
+      state.started = true;
+      state.resultSent = false;
+      generateExam();
+      welcomeScreen.classList.add("hidden");
+      examScreen.classList.remove("hidden");
+      resultScreen.classList.add("hidden");
+
+      startTimer();
+      enterFullscreen();
+
+      document.addEventListener("contextmenu", preventDefaultHandler, { passive: false });
+      document.addEventListener("keydown", keyboardBlocker);
+      document.addEventListener("visibilitychange", handleVisibilityChange);
+      document.addEventListener("blur", handleBlur);
+      window.addEventListener("beforeunload", beforeUnloadBlocker);
+    }
+
+    function preventDefaultHandler(e){
+      e.preventDefault();
+      return false;
+    }
+
+    function keyboardBlocker(e){
+      if (!state.started) return;
+
+      const blockedKeys = ["F12", "Escape", "PrintScreen", "Tab"];
+      const ctrlMeta = e.ctrlKey || e.metaKey;
+      const blockedCombo = ["r", "R", "s", "S", "p", "P", "c", "C", "v", "V", "u", "U"];
+
+      if (blockedKeys.includes(e.key) || (ctrlMeta && blockedCombo.includes(e.key))) {
+        e.preventDefault();
+      }
+    }
+
+    function beforeUnloadBlocker(e){
+      if (state.started) {
+        e.preventDefault();
+        e.returnValue = "";
+      }
+    }
+
+    function handleVisibilityChange(){
+      if (!state.started) return;
+      if (document.hidden) {
+        focusLock.classList.add("show");
+      } else {
+        focusLock.classList.remove("show");
+      }
+    }
+
+    function handleBlur(){
+      if (!state.started) return;
+      focusLock.classList.add("show");
+      setTimeout(() => {
+        if (document.visibilityState === "hidden") {
+          window.focus();
+        }
+      }, 250);
+    }
+
+    function openWA(message){
+      const waNumber = "6287863539155";
+      const waLink = `https://wa.me/${waNumber}?text=${encodeURIComponent(message)}`;
+      window.open(waLink, "_blank");
+    }
+
+    function buildResultMessage(studentName, className, correct, total, score, timeText, autoTrigger){
+      return `Halo Pak Dio,\n\nBerikut hasil latihan Fisika Kelas X:\nNama: ${studentName}\nKelas: ${className}\nBenar: ${correct}/${total}\nNilai: ${score}%\nWaktu: ${timeText}\nStatus: ${autoTrigger ? "Waktu habis" : "Selesai"}\n\nTerima kasih.`;
+    }
+
+    function saveAttemptToIndexedDB(payload){
+      return new Promise((resolve, reject) => {
+        if (!db) return reject(new Error("DB belum siap"));
+        const tx = db.transaction("attempts", "readwrite");
+        const store = tx.objectStore("attempts");
+        const request = store.add(payload);
+
+        request.onsuccess = () => resolve(true);
+        request.onerror = () => reject(request.error);
+      });
+    }
+
+    function initDB(){
+      return new Promise((resolve, reject) => {
+        const request = indexedDB.open(dbName, dbVersion);
+
+        request.onupgradeneeded = (event) => {
+          const database = event.target.result;
+          if (!database.objectStoreNames.contains("attempts")) {
+            database.createObjectStore("attempts", { keyPath: "id" });
+          }
+        };
+
+        request.onsuccess = (event) => {
+          db = event.target.result;
+          resolve(db);
+        };
+
+        request.onerror = (event) => {
+          reject(event.target.error);
+        };
+      });
+    }
+
+    function submitExam(autoTriggered = false){
+      if (!state.started) return;
+      state.started = false;
+      clearInterval(state.timerId);
+
+      let correct = 0;
+      state.questions.forEach((question, idx) => {
+        const selectedIndex = state.answers[idx];
+        const selectedText = selectedIndex !== null && selectedIndex !== undefined
+          ? question.options[selectedIndex]
+          : null;
+        if (selectedText && selectedText === question.correctAnswer) {
+          correct += 1;
+        }
+      });
+
+      const total = state.questions.length;
+      const wrong = total - correct;
+      const score = Math.round((correct / total) * 100);
+      const timeUsed = DURATION_SECONDS - state.timer;
+      const timeText = formatTime(timeUsed);
+
+      const studentName = studentNameInput.value.trim() || "Siswa";
+      const className = classNameInput.value.trim() || "Kelas";
+      const message = buildResultMessage(studentName, className, correct, total, score, timeText, autoTriggered);
+
+      scorePercent.textContent = `${score}%`;
+      correctCount.textContent = correct;
+      wrongCount.textContent = wrong;
+      finalScore.textContent = score;
+
+      if (score >= 80) {
+        resultText.textContent = "Hebat! Kamu sudah sangat siap untuk materi berikutnya.";
+      } else if (score >= 60) {
+        resultText.textContent = "Bagus, tetap semangat. Coba tingkatkan lagi ketelitianmu.";
+      } else if (score >= 40) {
+        resultText.textContent = "Masih ada ruang untuk belajar. Ulangi materi dan berlatih lagi.";
+      } else {
+        resultText.textContent = "Perlu lebih banyak latihan. Jangan menyerah, kamu pasti bisa naik level.";
+      }
+
+      examScreen.classList.add("hidden");
+      resultScreen.classList.remove("hidden");
+
+      const payload = {
+        id: Date.now() + "-" + Math.random().toString(16).slice(2),
+        studentName,
+        className,
+        correct,
+        wrong,
+        total,
+        score,
+        timeUsed,
+        startedAt: new Date(Date.now() - (timeUsed * 1000)).toISOString(),
+        finishedAt: new Date().toISOString(),
+        autoTriggered,
+        answers: state.questions.map((q, idx) => ({
+          question: q.q,
+          selected: state.answers[idx] !== null ? q.options[state.answers[idx]] : null,
+          correctAnswer: q.correctAnswer
+        }))
+      };
+
+      saveAttemptToIndexedDB(payload)
+        .catch(() => {
+          console.log("Gagal menyimpan history ke IndexedDB");
+        });
+
+      if (!state.resultSent) {
+        state.resultSent = true;
+        setTimeout(() => openWA(message), 600);
+      }
+
+      document.removeEventListener("contextmenu", preventDefaultHandler, { passive: false });
+      document.removeEventListener("keydown", keyboardBlocker);
+      document.removeEventListener("visibilitychange", handleVisibilityChange);
+      document.removeEventListener("blur", handleBlur);
+      window.removeEventListener("beforeunload", beforeUnloadBlocker);
+
+      focusLock.classList.remove("show");
+    }
+
+    startBtn.addEventListener("click", startQuiz);
+
+    prevBtn.addEventListener("click", () => {
+      if (state.currentIndex > 0) {
+        state.currentIndex -= 1;
+        renderQuestion();
+      }
+    });
+
+    nextBtn.addEventListener("click", () => {
+      if (state.currentIndex < state.questions.length - 1) {
+        state.currentIndex += 1;
+        renderQuestion();
+      }
+    });
+
+    submitBtn.addEventListener("click", () => submitExam(false));
+
+    restartBtn.addEventListener("click", () => {
+      state.started = false;
+      state.currentIndex = 0;
+      state.questions = [];
+      state.answers = [];
+      state.timer = DURATION_SECONDS;
+      state.resultSent = false;
+      clearInterval(state.timerId);
+
+      timerEl.classList.remove("warning", "danger");
+      updateTimerDisplay();
+
+      resultScreen.classList.add("hidden");
+      examScreen.classList.add("hidden");
+      welcomeScreen.classList.remove("hidden");
+
+      studentNameInput.value = "";
+      classNameInput.value = "";
+      focusLock.classList.remove("show");
+    });
+
+    sendWaBtn.addEventListener("click", () => {
+      const name = studentNameInput.value.trim() || "Siswa";
+      const klass = classNameInput.value.trim() || "Kelas";
+      const correct = Number(correctCount.textContent.trim()) || 0;
+      const total = state.questions.length || TOTAL_QUESTIONS;
+      const score = Number(finalScore.textContent.trim()) || 0;
+      const timeUsed = DURATION_SECONDS - state.timer;
+      const timeText = formatTime(timeUsed);
+
+      const message = buildResultMessage(name, klass, correct, total, score, timeText, false);
+      openWA(message);
+    });
+
+    initDB().catch((err) => {
+      console.error("IndexedDB gagal dibuat:", err);
+    });
+
+    updateTimerDisplay();
+  </script>
+</body>
+</html>
